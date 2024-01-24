@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView,TextInput } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TextInput } from 'react-native'
 import React from 'react'
 const Donate = () => {
     return (
@@ -26,6 +26,17 @@ const Donate = () => {
                     placeholder='Description'
                     placeholderTextColor={"#FFFFFF"}
                 />
+
+                {/* <MapView
+                    style={{ width: '20%', height: '20%' }}
+                    initialRegion={{
+                        latitude: 28.605649510003392,
+                        longitude: 77.2096483825537,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }}
+
+                /> */}
             </View>
         </ScrollView>
     )
@@ -41,7 +52,7 @@ const styles = StyleSheet.create({
         color: "#FFFFFF",
         fontSize: 20,
         marginLeft: '5%',
-        marginTop:"5%",
+        marginTop: "5%",
     },
     fieldStyle: {
         marginLeft: "5%",
@@ -53,5 +64,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         width: '90%',
         height: 50
-      },
+    },
 })
