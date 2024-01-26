@@ -2,14 +2,52 @@ import { Image, ImageBackground, ScrollView, StyleSheet, Text, View, TextInput, 
 import React, { useState } from 'react'
 //import Icon from 'react-native-vector-icons/AntDesign'
 import { Entypo } from 'react-native-vector-icons/Entypo'
-const Login = () => {
+const Login = ({ navigation }) => {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [userError, setUserError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const Validation = () => {
+    var isValid = true;
+    if (username == '') {
+      setUserError('Email do not empty');
+      isValid = false;
+    } else {
+      setUserError('');
+    }
+    isValid = true;
+    if (!username) {
+      setUserError.username = 'Email is required.';
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(username)) {
+      setUserError('Email is invalid.');
+    }
+    isValid = true;
+    if (password =='') {
+      setPasswordError('Password do not empty');
+      isValid = false;
+    } else {
+      setPasswordError('');
+    }
+    isValid = true;
+    if (password.length < 6) {
+      setPasswordError('Password must be at least 6 characters.');
+    }
+
+    // if (isValid) {
+    //     check();
+    // }
+  }
+
 
   return (
     <ScrollView>
       <View style={styles.container}>
         <ImageBackground
           source={require('../assets/images/bthre.png')}
-          resizeMode="stretch"
+          resizeMode='cover'
           style={styles.img}>
 
           <View style={styles.icon}>
@@ -19,28 +57,35 @@ const Login = () => {
             />
           </View>
           <View>
+
             <TextInput
               style={styles.fieldStyle}
               placeholder='Email'
               placeholderTextColor={"black"}
+              value={username}
+              onChangeText={(text) => setUsername(text)}
             />
+            <Text style={styles.errorMsg}>{userError}</Text>
 
             <TextInput
               style={styles.fieldStyle}
               placeholder='Password'
               placeholderTextColor={"black"}
               secureTextEntry={true}
+              value={password}
+              onChangeText={(text) => setPassword(text)}
             />
+            <Text style={styles.errorMsg}>{passwordError}</Text>
 
-            <TouchableOpacity style={styles.bottomButton}>
-              <Text style={{ fontWeight: '700',color: '#FFFFFF' ,fontSize:20}}>Login</Text>
+            <TouchableOpacity style={styles.bottomButton} onPress={Validation}>
+              <Text style={{ fontWeight: '700', color: '#FFFFFF', fontSize: 20 }}>Login</Text>
             </TouchableOpacity>
 
             <View style={styles.forgetStyle}>
               <Text style={styles.forgetText}>Not Registered! Click here to</Text>
             </View>
             <TouchableOpacity style={styles.RegStyle}>
-            <Text style={styles.Register}>Register</Text>
+              <Text style={styles.Register}>Register</Text>
             </TouchableOpacity>
 
 
@@ -112,18 +157,22 @@ const styles = StyleSheet.create({
   forgetText: {
     fontSize: 16,
     color: '#FFFFFF',
-    fontWeight:'800',
+    fontWeight: '800',
   },
-  Register:{
+  Register: {
     fontSize: 16,
     color: '#FFFFFF',
-    fontWeight:'800',
-    justifyContent:'center',
-    marginBottom:'20%'
+    fontWeight: '800',
+    justifyContent: 'center',
+    marginBottom: '20%'
   },
-  RegStyle:{
-    justifyContent:'center',
-    alignItems:'center',
+  RegStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorMsg: {
+    color: 'red',
+    marginLeft: "5%"
   }
 
 })
