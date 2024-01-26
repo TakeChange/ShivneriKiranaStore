@@ -7,14 +7,20 @@ import Donate from './src/screen/Donate'
 import Login from './src/screen/Login'
 
 
+
 const App = () => {
   return (
     <View>
       <Text>App</Text>
     </View>
+<<<<<<< HEAD
   
     
+=======
+>>>>>>> 5f59b6dc44ca4b920eff12a2d6f4d026d6a31730
   )
 }
 
 export default App
+
+
