@@ -13,11 +13,8 @@ const App = () => {
     <View>
       <Text>App</Text>
     </View>
-<<<<<<< HEAD
   
     
-=======
->>>>>>> 5f59b6dc44ca4b920eff12a2d6f4d026d6a31730
   )
 }
 
