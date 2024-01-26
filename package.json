@@ -12,6 +12,8 @@
   "dependencies": {
     "react": "18.2.0",
     "react-native": "0.73.2",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
+    "react-native-vector-icons": "^10.0.3",
     "react-native-maps": "^1.10.0",
     "react-native-onesignal": "^5.0.4"
   },
