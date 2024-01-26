@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ImageBackground } from 'react-native'
+import { View, Text, StyleSheet, ImageBackground,Image } from 'react-native'
 import React, { useEffect } from 'react'
 
 const SplashScreen = ({ navigation }) => {
@@ -10,10 +10,10 @@ const SplashScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
+      <Image
         source={require("../assets/images/splash.png")}
-        style={{ width: '95%', height: '70%' }}
-      ></ImageBackground>
+        style={{ width: '45%', height: '40%' }}
+      ></Image>
     </View>
   )
 }
