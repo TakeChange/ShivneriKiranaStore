@@ -12,13 +12,10 @@
   "dependencies": {
     "react": "18.2.0",
     "react-native": "0.73.2",
-<<<<<<< HEAD
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
-    "react-native-vector-icons": "^10.0.3"
-=======
     "react-native-maps": "^1.10.0",
-    "react-native-onesignal": "^5.0.4"
->>>>>>> 291bdc06aaadf72209f381498660c480caf50b0b
+    "react-native-onesignal": "^5.0.4",
+    "react-native-vector-icons": "^10.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

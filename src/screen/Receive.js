@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
-import { MapView } from 'react-native-maps'
+//import { MapView } from 'react-native-maps'
 
 const Receive = () => {
 
