@@ -1,8 +1,8 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList } from 'react-native'
 import React from 'react'
 
-const Dashboard = () => {
-
+const Dashboard = ({navigation}) => {
+  
   DashElement = [
     {
       id: 1,
@@ -46,9 +46,16 @@ const Dashboard = () => {
     },
   ]
 
+  const check=(item)=>{
+    if(item == 1)
+    {
+      navigation.navigate('Donate')
+    }
+  }
+
   const Dash = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.flatlistView}>
+      <TouchableOpacity style={styles.flatlistView} onPress={()=>check(item.id)} >
         <View style={styles.flatlist}>
           <Image source={item.image}
             style={styles.flatlisticon}
