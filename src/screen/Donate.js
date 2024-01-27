@@ -1,6 +1,8 @@
-import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity,ToastAndroid } from 'react-native'
+import React, { useState,useEffect } from 'react'
 import MapView from 'react-native-maps';
+import { openDatabase } from 'react-native-sqlite-storage'
+var db = openDatabase({ name: 'DonateAnything.db' });
 const Donate = () => {
 
     const [donername, setdonername] = useState('');
@@ -12,6 +14,64 @@ const Donate = () => {
     const [donateItemsError, setdonateItemsError] = useState('');
     const [phoneError,setphoneError] = useState('');
     const [descriptionError,setdescriptionError] = useState('');
+
+    //sqlite
+
+    useEffect(() => {
+        db.transaction(txn => {
+          txn.executeSql(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='donar'",
+            [],
+            (tx, res) => {
+              console.log('item:', res.rows.length);
+              if (res.rows.length == 0) {
+                txn.executeSql('DROP TABLE IF EXISTS donar', []);
+                txn.executeSql(
+                  'CREATE TABLE IF NOT EXISTS donar(donar_id INTEGER PRIMARY KEY AUTOINCREMENT, donar_name VARCHAR(20), donate_items VARCHAR(20),phone INT(12),description VARCHAR(50))',
+                  []
+                );
+              }
+              else {
+                console.log('Table already exits');
+              }
+            }
+          );
+        });
+      }, [])
+
+      const addDoner = () => {
+        var isValid = false;
+        console.log(donername, donateItems, phone, description);
+    
+        if (donername != '' && donateItems != '' && phone != '' && description != '') {
+          isValid = true;
+        }
+    
+        if (isValid == true) {
+          db.transaction(tx => {
+            tx.executeSql(
+              'INSERT INTO donar(donar_name,donate_items,phone,description) VALUES (?,?,?,?)',
+              [donername, donateItems, phone, description],
+              //console.log(donername),
+              (tx, results) => {
+                console.log('Results', results);
+                if (results.rowsAffected > 0) // 0>0  false   1>0 true
+                {
+                  ToastAndroid.show('added successfully', ToastAndroid.SHORT);
+                  setdonername('');
+                  setDonateItems('');
+                  setphone('');
+                  setdescription('');
+                }
+                else {
+                  console.log('fail')
+                }
+              }
+            );
+          });
+        }
+    
+      }
 
     const Validation = () => {
         var isValid = true;
@@ -44,12 +104,8 @@ const Donate = () => {
             isValid = false;
         } else {
             setdescriptionError('');
+            addDoner();
         }
-
-        
-        // if (isValid) {
-        //     check();
-        // }
     }
 
 

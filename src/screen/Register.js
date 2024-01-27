@@ -1,4 +1,4 @@
-import { View, TextInput, ImageBackground, StyleSheet, Image, TouchableOpacity, Text,ToastAndroid } from 'react-native'
+import { View, TextInput, ImageBackground, StyleSheet, Image, TouchableOpacity, Text, ToastAndroid } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Eye from 'react-native-vector-icons/AntDesign';
 import { openDatabase } from 'react-native-sqlite-storage'
@@ -59,7 +59,7 @@ var db = openDatabase({ name: 'DonateAnything.db' });
         tx.executeSql(
           'INSERT INTO user_reg(name,email,phone,password) VALUES (?,?,?,?)',
           [name, email, phone, password],
-          console.log(name),
+
           (tx, results) => {
             console.log('Results', results);
             if (results.rowsAffected > 0) // 0>0  false   1>0 true
@@ -68,7 +68,7 @@ var db = openDatabase({ name: 'DonateAnything.db' });
               setEmail('');
               setName('');
               setPassword('');
-              setMobile('');
+              setPhone('');
               navigation.navigate('LoginScreen');
             }
             else {
