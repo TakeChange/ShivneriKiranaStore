@@ -1,12 +1,11 @@
 import React from 'react'
 import AppNavigation from './src/navigation/AppNavigation'
-import Dashboard from './src/screen/Dashboard'
-import Register from './src/screen/Register'
+// import Login from './src/screen/Login'
+// import Donate from './src/screen/Donate'
 
 const App = () => {
   return (
    <AppNavigation/>
-  
   )
 }
 
