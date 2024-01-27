@@ -2,11 +2,11 @@ import { View, Text, StyleSheet, ImageBackground,Image } from 'react-native'
 import React, { useEffect } from 'react'
 
 const SplashScreen = ({ navigation }) => {
-  useEffect(() => {
-    setTimeout(() => {
-      //navigation.navigate('DonateMapScreen');
-    }, 2000)
-  }, [])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     //navigation.navigate('DonateMapScreen');
+  //   }, 2000)
+  // }, [])
 
   return (
     <View style={styles.container}>
