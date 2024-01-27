@@ -28,7 +28,7 @@ const Receive = () => {
         // if (isValid) {
         //     check();
         // }
-       
+
     }
 
 
@@ -71,15 +71,7 @@ const Receive = () => {
                         source={require("../assets/images/qr_image.jpeg")}
                         style={{ width: '100%', height: '65%', marginTop: '90%' }}>
                     </Image>
-                    {/* <View>
-                    <TouchableOpacity style={styles.bottomButton} onPress={() => { }}>
-                        <Text style={styles.submit} >SUBMIT</Text>
-                    </TouchableOpacity>
-                
-                    </View> */}
-
                 </View>
-
             </View>
             <View>
                 <TouchableOpacity style={styles.bottomButton} onPress={Validation}>
@@ -108,7 +100,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     fieldStyle: {
-       
+
         marginTop: '8%',
         color: '#FFFFFF',
         borderBottomWidth: 1,
@@ -134,8 +126,8 @@ const styles = StyleSheet.create({
     },
     errorMsg: {
         color: 'red',
-        fontSize:12,
-        
+        fontSize: 12,
+
     }
 
 })
