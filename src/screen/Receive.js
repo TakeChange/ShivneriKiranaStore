@@ -36,7 +36,7 @@ const Receive = () => {
         <ScrollView style={{ backgroundColor: '#000000' }}>
             <View style={styles.container}>
                 <Text style={styles.Receive}>Receive</Text>
-
+                
                 <TextInput
                     value={receivername}
                     onChangeText={(text) => setReceivername(text)}
