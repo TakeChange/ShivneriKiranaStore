@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   icon:{
-    height:80,
-    width:80,
+    height:'10%',
+    width:'20%',
     alignItems:'center',
     justifyContent:'center',
     borderRadius:90/2,
