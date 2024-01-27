@@ -1,4 +1,4 @@
-import { View, TextInput, ImageBackground, StyleSheet, Image, TouchableOpacity, Text,ToastAndroid } from 'react-native'
+import { View, TextInput, ImageBackground, StyleSheet, Image, TouchableOpacity, Text, ToastAndroid } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Eye from 'react-native-vector-icons/AntDesign';
 
@@ -57,7 +57,7 @@ const Register = ({ navigation }) => {
         tx.executeSql(
           'INSERT INTO user_reg(name,email,phone,password) VALUES (?,?,?,?)',
           [name, email, phone, password],
-          console.log(name),
+
           (tx, results) => {
             console.log('Results', results);
             if (results.rowsAffected > 0) // 0>0  false   1>0 true
@@ -66,7 +66,7 @@ const Register = ({ navigation }) => {
               setEmail('');
               setName('');
               setPassword('');
-              setMobile('');
+              setPhone('');
               navigation.navigate('LoginScreen');
             }
             else {

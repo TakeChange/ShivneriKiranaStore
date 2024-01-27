@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList } from 'react-native'
 import React from 'react'
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Dashboard = ({navigation}) => {
   
   DashElement = [
@@ -80,6 +80,11 @@ const Dashboard = ({navigation}) => {
     else if(item == 7)
     {
       navigation.navigate('SubmitScreen')
+    }
+    else if(item == 8)
+    {
+      AsyncStorage.setItem('LoginScreen',' no');
+      navigation.navigate('LoginScreen')
     }
 
   }

@@ -1,10 +1,16 @@
-import { Image, ImageBackground, ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native'
-import React, { useState } from 'react'
+import { Image, ImageBackground, ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import Eye from 'react-native-vector-icons/AntDesign';
-const Login = ({ navigation }) => {
+import { openDatabase } from 'react-native-sqlite-storage';
+import { useIsFocused } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-  const [username, setUsername] = useState('');
+const Login = ({ navigation }) => {
+  const db = openDatabase({ name: 'DonateAnything.db' });
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [email1, setEmail1] = useState('');
+  const [password1, setPassword1] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [userError, setUserError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -13,40 +19,77 @@ const Login = ({ navigation }) => {
     setShowPassword(!showPassword);
   };
 
+
+  useEffect(() => {
+    getData();
+  }, [])
+
+
+  const getData = () => {
+    db.transaction(tx => {
+      tx.executeSql('SELECT email,password FROM user_reg', [], (tx, results) => {
+        var temp = [];
+        for (let i = 0; i < results.rows.length; ++i) {
+          temp.push(results.rows.item(i));
+          //console.log(results.rows.item(i))
+          var Email = results.rows.item(i).email;
+          var Password = results.rows.item(i).password;
+          setEmail(Email);
+          setPassword(Password);
+        }
+
+      })
+    })
+  }
+
+  const check = () => {
+    if (email == email1 && password == password1) {
+
+      Alert.alert('Login Successful');
+      AsyncStorage.setItem('LoginScreen','yes');
+      navigation.navigate('DashboardScreen');
+
+    }
+    else {
+      Alert.alert('username & password not match ');
+
+    }
+  }
+
   const Validation = () => {
     var isValid = true;
-    if (username == '') {
+    if (email1 == '') {
       setUserError('Email do not empty');
       isValid = false;
-    } else {
+    } 
+    else
+    if (!email1) {
+      setUserError('Email is required.')
+      isValid = false;
+    }
+    else {
       setUserError('');
     }
-    isValid = true;
-    if (!username) {
-      setUserError.username = 'Email is required.';
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(username)) {
-      setUserError('Email is invalid.');
-    }
-    isValid = true;
-    if (password == '') {
+    
+
+    if (password1 == '') {
       setPasswordError('Password do not empty');
       isValid = false;
     }
-    else if (password.length < 6) {
+    else if (password1.length < 6) {
       setPasswordError('Password must be 6 character');
     } else {
       setPasswordError('');
     }
 
-    if (isValid==false) {
-       navigation.navigate('DashboardScreen');
+    if (isValid) {
+      check();
     }
   }
 
 
   return (
-  
+
     <View style={styles.container}>
       <ImageBackground source={require('../assets/images/bthre.png')} resizeMode="cover" style={styles.image}>
         <View style={styles.icon}>
@@ -61,8 +104,8 @@ const Login = ({ navigation }) => {
             style={styles.fieldStyle}
             placeholder='Email'
             placeholderTextColor={"black"}
-            value={username}
-            onChangeText={(text) => setUsername(text)}
+            value={email1}
+            onChangeText={(text) => setEmail1(text)}
           />
           <Text style={styles.errorMsg}>{userError}</Text>
 
@@ -72,8 +115,8 @@ const Login = ({ navigation }) => {
               placeholder='Password'
               placeholderTextColor={"black"}
               secureTextEntry={!showPassword}
-              value={password}
-              onChangeText={(text) => setPassword(text)}
+              value={password1}
+              onChangeText={(text) => setPassword1(text)}
             />
 
             <Eye
@@ -95,7 +138,7 @@ const Login = ({ navigation }) => {
             <Text style={styles.forgetText}>Not Registered! Click here to</Text>
           </View>
           <TouchableOpacity style={styles.RegStyle} onPress={() => navigation.navigate('RegisterScreen')}>
-          
+
             <Text style={styles.Register}>Register</Text>
           </TouchableOpacity>
 
