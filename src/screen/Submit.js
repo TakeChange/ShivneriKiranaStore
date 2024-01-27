@@ -1,8 +1,11 @@
-import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView,Image } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity, ScrollView,Image } from 'react-native'
+import React, { useState,useEffect } from 'react'
+import { openDatabase } from 'react-native-sqlite-storage'
 
 const Submit = ({ navigation }) => {
   
+  var db = openDatabase({ name: 'DonateAnything.db' });
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [msg, setMsg] = useState('');
@@ -10,6 +13,67 @@ const Submit = ({ navigation }) => {
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [msgError, setMsgError] = useState('');
+
+  useEffect(() => {
+    db.transaction(txn => {
+      txn.executeSql(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='Contact_US'",
+        [],
+        (tx, res) => {
+          console.log('item:', res.rows.length);
+          if (res.rows.length == 0) {
+            txn.executeSql('DROP TABLE IF EXISTS Contact_US', []);
+            txn.executeSql(
+              'CREATE TABLE IF NOT EXISTS Contact_US(contact_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(20), email VARCHAR(20),message VARCHAR(30))',
+              []
+            );
+          }
+          else {
+            console.log('Table already exits');
+          }
+        }
+      );
+    });
+  }, [])
+
+  const addContact = () => {
+    var isValid = false;
+    console.log(name, email, msg);
+
+    if (name != '' && email != '' && msg != '') {
+      isValid = true;
+    }
+
+    if (isValid == true) {
+      db.transaction(tx => {
+        tx.executeSql(
+          'INSERT INTO Contact_US(name,email,message) VALUES (?,?,?)',
+          [name, email, msg],
+         // console.log(name),
+          (tx, results) => {
+            console.log('Results', results);
+            if (results.rowsAffected > 0) // 0>0  false   1>0 true
+            {
+              ToastAndroid.show('added successfully', ToastAndroid.SHORT);
+              setEmail('');
+              setName('');
+              setMsg('');
+              
+            }
+            else {
+              console.log('fail')
+            }
+          }
+        );
+      });
+    }
+    // else {
+    //     Alert.alert('Please enter the all filds');
+    // }
+  }
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const Validation = () => {
     var isValid = true;
@@ -38,6 +102,7 @@ const Submit = ({ navigation }) => {
         isValid = false;
     } else {
         setMsgError('');
+        addContact();
     }
 
     // if (isValid) {
