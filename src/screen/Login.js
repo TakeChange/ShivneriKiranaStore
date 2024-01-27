@@ -224,7 +224,8 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '800',
     justifyContent: 'center',
-    marginBottom: '20%'
+    marginBottom: '20%',
+    textDecorationLine: 'underline'
   },
   RegStyle: {
     justifyContent: 'center',

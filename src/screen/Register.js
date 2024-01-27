@@ -1,10 +1,12 @@
 import { View, TextInput, ImageBackground, StyleSheet, Image, TouchableOpacity, Text, ToastAndroid } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Eye from 'react-native-vector-icons/AntDesign';
-
 import { openDatabase } from 'react-native-sqlite-storage'
-var db = openDatabase({ name: 'DonateAnything.db' });
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 const Register = ({ navigation }) => {
+
+var db = openDatabase({ name: 'DonateAnything.db' });
+
 
   ///////////////////////////
 
@@ -184,9 +186,13 @@ const Register = ({ navigation }) => {
           <TouchableOpacity style={styles.btn} onPress={Validation}>
             <Text style={styles.btnText}>REGISTER</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.lasttext}>Already Registered ?</Text>
-          </TouchableOpacity>
+          <Text style={styles.lasttext}>Already Registered ?</Text>
+
+          <TouchableOpacity style={styles.loginStyle} onPress={() => navigation.navigate('LoginScreen')}>
+          
+          <Text style={styles.Login}>Login</Text>
+        </TouchableOpacity>
+          
         </View>
 
       </ImageBackground>
@@ -268,7 +274,7 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: 'black',
     marginTop: '10%',
-    height: '12%',
+    height: '11%',
     borderRadius: 15
   },
   btnText: {
@@ -276,7 +282,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingTop: '5%'
+    paddingTop: '6%'
   },
   lasttext: {
     color: 'white',
@@ -288,7 +294,18 @@ const styles = StyleSheet.create({
   errorMsg: {
     color: 'red',
     fontSize: 20
-  }
+  },
+  loginStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  Login: {
+    fontSize: 15,
+    color: '#FFFFFF',
+    fontWeight: '800',
+    justifyContent: 'center',
+    textDecorationLine: 'underline'
+  },
 });
 
 

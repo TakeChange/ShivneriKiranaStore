@@ -1,22 +1,36 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import MapView from 'react-native-maps';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
+
 const PinsScreen = () => {
-    return (
-        <View style={{ flex: 1, backgroundColor: 'black' }}>
-            <Text style={{ fontSize: 18, fontWeight: '900', color: 'white',margin:'5%' }}>My Pins</Text>
-            <MapView
-                style={{ width: '100%', height: '92%' }}
-                initialRegion={{
-                    latitude: 28.605649510003392,
-                    longitude: 77.2096483825537,
-                    latitudeDelta: 12,
-                    longitudeDelta: 12,
-                }}
+  return (
+    <View style={styles.container}>
+      <MapView
+        style={styles.map}
+        initialRegion={{
+          latitude: 37.7749,
+          longitude: -122.4194,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      >
+        <Marker
+          coordinate={{ latitude: 37.7749, longitude: -122.4194 }}
+          title="Marker Title"
+          description="Marker Description"
+        />
+      </MapView>
+    </View>
+  );
+};
 
-            />
-        </View>
-    )
-}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  map: {
+    flex: 1,
+  },
+});
 
-export default PinsScreen
+export default PinsScreen;
