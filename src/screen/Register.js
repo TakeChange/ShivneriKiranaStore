@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Eye from 'react-native-vector-icons/AntDesign';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-const App = () => {
+const Register = () => {
 
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -71,10 +71,10 @@ const App = () => {
 
     <View style={styles.container}>
 
-      <ImageBackground source={require("../ShivneriKiranaStore/src/assets/images/bthre.png")} resizeMode="cover" style={styles.image}>
+      <ImageBackground source={require("../assets/images/bthre.png")} resizeMode="cover" style={styles.image}>
 
         <View style={styles.View1}>
-          <Image source={require("../ShivneriKiranaStore/src/assets/icons/add.png")} style={styles.icon} />
+          <Image source={require("../assets/icons/add.png")} style={styles.icon} />
         </View>
         <View style={styles.View2}>
           <TextInput
@@ -139,7 +139,7 @@ const App = () => {
   )
 }
 
-export default App
+export default Register
 
 const styles = StyleSheet.create({
   container: {
