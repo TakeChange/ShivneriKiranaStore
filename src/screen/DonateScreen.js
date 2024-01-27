@@ -58,10 +58,10 @@ const styles = StyleSheet.create({
     
   },
   icon: {
-    width: '34%',
-    height: '55%',
+    width: '30%',
+    height: '56%',
     alignSelf: 'center',
-    marginTop: '8%'
+    marginTop: '5%'
   },
   ViewText: {
     color: 'white',

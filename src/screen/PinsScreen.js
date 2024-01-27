@@ -6,7 +6,7 @@ const PinsScreen = () => {
         <View style={{ flex: 1, backgroundColor: 'black' }}>
             <Text style={{ fontSize: 18, fontWeight: '900', color: 'white',margin:'5%' }}>My Pins</Text>
             <MapView
-                style={{ width: '100%', height: '90%' }}
+                style={{ width: '100%', height: '92%' }}
                 initialRegion={{
                     latitude: 28.605649510003392,
                     longitude: 77.2096483825537,
