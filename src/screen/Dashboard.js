@@ -49,8 +49,39 @@ const Dashboard = ({navigation}) => {
   const check=(item)=>{
     if(item == 1)
     {
-      navigation.navigate('Donate')
+      navigation.navigate('DonateScreen')
     }
+
+    else if(item == 2)
+    {
+      navigation.navigate('ReceiveScreen')
+    }
+
+    else if(item == 3)
+    {
+      navigation.navigate('DonateMapScreen')
+    }
+
+    else if(item == 4)
+    {
+      navigation.navigate('PinsScreen')
+    }
+
+    else if(item == 5)
+    {
+      navigation.navigate('HistoryScreen')
+    }
+
+    else if(item == 6)
+    {
+      navigation.navigate('DonateMoneyScreen')
+    }
+
+    else if(item == 7)
+    {
+      navigation.navigate('SubmitScreen')
+    }
+
   }
 
   const Dash = ({ item }) => {
