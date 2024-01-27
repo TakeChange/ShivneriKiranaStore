@@ -5,8 +5,8 @@ import DonateScreen from './src/screen/DonateScreen'
 
 const App = () => {
   return (
-    // <AppNavigation/>
-   <DonateScreen/>
+    <AppNavigation/>
+ 
   )
 }
 
