@@ -46,7 +46,7 @@ const Login = ({ navigation }) => {
 
 
   return (
-
+  
     <View style={styles.container}>
       <ImageBackground source={require('../assets/images/bthre.png')} resizeMode="cover" style={styles.image}>
         <View style={styles.icon}>
@@ -94,7 +94,8 @@ const Login = ({ navigation }) => {
           <View style={styles.forgetStyle}>
             <Text style={styles.forgetText}>Not Registered! Click here to</Text>
           </View>
-          <TouchableOpacity style={styles.RegStyle}>
+          <TouchableOpacity style={styles.RegStyle} onPress={() => navigation.navigate('RegisterScreen')}>
+          
             <Text style={styles.Register}>Register</Text>
           </TouchableOpacity>
 
