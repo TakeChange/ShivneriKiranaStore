@@ -1,54 +1,61 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList } from 'react-native'
 import React from 'react'
 
-const App = () => {
-
+const Dashboard = ({navigation}) => {
+  
   DashElement = [
     {
       id: 1,
-      image: require('../ShivneriKiranaStore/src/assets/icons/donate.png'),
+      image: require('../assets/icons/donate.png'),
       text: 'Donate'
     },
     {
       id: 2,
-      image: require('../ShivneriKiranaStore/src/assets/icons/rcv.png'),
+      image: require('../assets/icons/rcv.png'),
       text: 'Receive'
     },
     {
       id: 3,
-      image: require('../ShivneriKiranaStore/src/assets/icons/map.png'),
+      image: require('../assets/icons/map.png'),
       text: 'Food Map'
     },
     {
       id: 4,
-      image: require('../ShivneriKiranaStore/src/assets/icons/mypins.png'),
+      image: require('../assets/icons/mypins.png'),
       text: 'My Pins'
     },
     {
       id: 5,
-      image: require('../ShivneriKiranaStore/src/assets/icons/history.png'),
+      image: require('../assets/icons/history.png'),
       text: 'History'
     },
     {
       id: 6,
-      image: require('../ShivneriKiranaStore/src/assets/icons/about.png'),
+      image: require('../assets/icons/about.png'),
       text: 'Donate Money'
     },
     {
       id: 7,
-      image: require('../ShivneriKiranaStore/src/assets/icons/donate.png'),
+      image: require('../assets/icons/donate.png'),
       text: 'Contact US'
     },
     {
       id: 8,
-      image: require('../ShivneriKiranaStore/src/assets/icons/lgout.png'),
+      image: require('../assets/icons/lgout.png'),
       text: 'Log Out'
     },
   ]
 
+  const check=(item)=>{
+    if(item == 1)
+    {
+      navigation.navigate('Donate')
+    }
+  }
+
   const Dash = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.flatlistView}>
+      <TouchableOpacity style={styles.flatlistView} onPress={()=>check(item.id)} >
         <View style={styles.flatlist}>
           <Image source={item.image}
             style={styles.flatlisticon}
@@ -78,7 +85,7 @@ const App = () => {
   )
 }
 
-export default App
+export default Dashboard
 
 const styles = StyleSheet.create({
   container: {
