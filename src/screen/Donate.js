@@ -32,13 +32,12 @@ const Donate = () => {
         if (phone == '') {
             setphoneError('Phone number do not empty');
             isValid = false;
-        } else {
+        }else if (phone.length < 10) {
+            setphoneError('Phone no. must be 10 digits');
+          } else {
             setphoneError('');
         }
-        isValid = true;
-    if(phone.length < 10){
-      setphoneError('Phone must be at least 10 digit.')
-    }
+        
 
         if (description == '') {
             setdescriptionError('Description do not empty');
@@ -81,6 +80,7 @@ const Donate = () => {
                     placeholderTextColor={"#FFFFFF"}
                     value={phone}
                     onChangeText={(text) =>setphone(text)}
+                    keyboardType="numeric"
                 />
                 <Text style={styles.errorMsg}>{phoneError}</Text>
                 <TextInput
