@@ -7,7 +7,6 @@ import Register from './src/screen/Register'
 const App = () => {
   return (
     <AppNavigation/>
-    //<Register/>  
   )
 }
 
