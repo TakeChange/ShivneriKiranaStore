@@ -5,7 +5,7 @@ const DonateScreen = ({navigation}) => {
     <ScrollView>
     <View style={styles.container}>
       <Text style={styles.text}>Donate Anything</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+      <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
         <View style={styles.View1}>
           <Image
             source={require("../assets/icons/donate.png")}
@@ -14,7 +14,7 @@ const DonateScreen = ({navigation}) => {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+      <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
         <View style={styles.View1}>
           <Image
             source={require("../assets/icons/add.png")}
@@ -23,7 +23,7 @@ const DonateScreen = ({navigation}) => {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('DonateMoney')}>
+      <TouchableOpacity onPress={() => navigation.navigate('DonateMoneyScreen')}>
         <View style={styles.View1}>
           <Image
             source={require("../assets/icons/about.png")}
