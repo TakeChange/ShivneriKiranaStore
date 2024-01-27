@@ -1,24 +1,87 @@
-import { View, TextInput, ImageBackground, StyleSheet, Image, TouchableOpacity, Text } from 'react-native'
-import React, { useState } from 'react'
+import { View, TextInput, ImageBackground, StyleSheet, Image, TouchableOpacity, Text,ToastAndroid } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import Eye from 'react-native-vector-icons/AntDesign';
-
+import { openDatabase } from 'react-native-sqlite-storage'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-const Register = () => {
+const Register = ({ navigation }) => {
+
+var db = openDatabase({ name: 'DonateAnything.db' });
+
+
+  ///////////////////////////
 
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  //const [pass, setPass] = useState('');
 
   const [nameerr, setNameerr] = useState('');
   const [emailerr, setEmailerr] = useState('');
   const [phoneerr, setPhoneerr] = useState('');
   const [passerr, setPasserr] = useState('');
 
-  const emailRegex = '^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
+  //////////////////////////////
+  //SQLITE
+  useEffect(() => {
+    db.transaction(txn => {
+      txn.executeSql(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='user_reg'",
+        [],
+        (tx, res) => {
+          console.log('item:', res.rows.length);
+          if (res.rows.length == 0) {
+            txn.executeSql('DROP TABLE IF EXISTS register', []);
+            txn.executeSql(
+              'CREATE TABLE IF NOT EXISTS user_reg(user_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(20), email VARCHAR(20),phone INT(12),password VARCHAR(20))',
+              []
+            );
+          }
+          else {
+            console.log('Table already exits');
+          }
+        }
+      );
+    });
+  }, [])
+
+
+  const addEmployee = () => {
+    var isValid = false;
+    console.log(name, email, phone, password);
+
+    if (name != '' && email != '' && phone != '' && password != '') {
+      isValid = true;
+    }
+
+    if (isValid == true) {
+      db.transaction(tx => {
+        tx.executeSql(
+          'INSERT INTO user_reg(name,email,phone,password) VALUES (?,?,?,?)',
+          [name, email, phone, password],
+          console.log(name),
+          (tx, results) => {
+            console.log('Results', results);
+            if (results.rowsAffected > 0) // 0>0  false   1>0 true
+            {
+              ToastAndroid.show('added successfully', ToastAndroid.SHORT);
+              setEmail('');
+              setName('');
+              setPassword('');
+              setMobile('');
+              navigation.navigate('LoginScreen');
+            }
+            else {
+              console.log('fail')
+            }
+          }
+        );
+      });
+    }
+    // else {
+    //     Alert.alert('Please enter the all filds');
+    // }
+  }
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -37,11 +100,6 @@ const Register = () => {
       setEmailerr('Enter Email');
       isValid = false;
     }
-    // else
-    //   if (!emailRegex.test(email)) {
-    //     setEmailerr('Enter Valid Email');
-    //     isValid = false;
-    //   }
     else {
       setEmailerr('');
     }
@@ -50,7 +108,7 @@ const Register = () => {
       setPhoneerr('Enter Phone Number');
       isValid = false;
     }
-    
+
     else {
       setPhoneerr('');
     }
@@ -64,6 +122,7 @@ const Register = () => {
     }
     else {
       setPasserr('');
+      addEmployee();
     }
   }
 
@@ -127,9 +186,13 @@ const Register = () => {
           <TouchableOpacity style={styles.btn} onPress={Validation}>
             <Text style={styles.btnText}>REGISTER</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.lasttext}>Already Registered ?</Text>
-          </TouchableOpacity>
+          <Text style={styles.lasttext}>Already Registered ?</Text>
+
+          <TouchableOpacity style={styles.loginStyle} onPress={() => navigation.navigate('LoginScreen')}>
+          
+          <Text style={styles.Login}>Login</Text>
+        </TouchableOpacity>
+          
         </View>
 
       </ImageBackground>
@@ -211,7 +274,7 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: 'black',
     marginTop: '10%',
-    height: '12%',
+    height: '11%',
     borderRadius: 15
   },
   btnText: {
@@ -219,7 +282,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingTop: '5%'
+    paddingTop: '6%'
   },
   lasttext: {
     color: 'white',
@@ -231,7 +294,18 @@ const styles = StyleSheet.create({
   errorMsg: {
     color: 'red',
     fontSize: 20
-  }
+  },
+  loginStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  Login: {
+    fontSize: 15,
+    color: '#FFFFFF',
+    fontWeight: '800',
+    justifyContent: 'center',
+    textDecorationLine: 'underline'
+  },
 });
 
 

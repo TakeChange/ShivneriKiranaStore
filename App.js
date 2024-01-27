@@ -1,6 +1,6 @@
 import React from 'react'
 import AppNavigation from './src/navigation/AppNavigation'
-import PinsScreen from './src/screen/PinsScreen'
+import Register from './src/screen/Register'
 
 
 
