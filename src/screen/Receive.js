@@ -36,7 +36,7 @@ const Receive = () => {
         <ScrollView style={{ backgroundColor: '#000000' }}>
             <View style={styles.container}>
                 <Text style={styles.Receive}>Receive</Text>
-                
+
                 <TextInput
                     value={receivername}
                     onChangeText={(text) => setReceivername(text)}
@@ -71,9 +71,7 @@ const Receive = () => {
                         source={require("../assets/images/qr_image.jpeg")}
                         style={{ width: '100%', height: '65%', marginTop: '90%' }}>
                     </Image>
-               </View>
-
-
+                </View>
             </View>
             <View>
                 <TouchableOpacity style={styles.bottomButton} onPress={Validation}>
@@ -129,7 +127,7 @@ const styles = StyleSheet.create({
     errorMsg: {
         color: 'red',
         fontSize: 12,
-    
+
     }
 
 })
