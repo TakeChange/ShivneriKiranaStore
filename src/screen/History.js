@@ -8,11 +8,12 @@ import { openDatabase } from 'react-native-sqlite-storage'
 const History = () => {
 
   var db = openDatabase({ name: 'DonateAnything.db' });
+  const [donarList, setDonerList] = useState([])
   const isFocused = useIsFocused();
   useEffect(() => {
     getData();
   }, [isFocused])
-  const [donarList, setDonerList] = useState([])
+  
 
   const getData = () => {
     db.transaction(tx => {
@@ -44,7 +45,7 @@ const History = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>History</Text>
+      <Text style={styles.text}>Donar History</Text>
       <View>
         <FlatList
           data={donarList}
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
   },
   Container1: {
     marginTop: '10%',
-    backgroundColor: 'pink',
+    backgroundColor: '#333333',
     borderRadius: 20,
     padding: '8%',
     justifyContent: 'center',

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity,ToastAndroid } from 'react-native'
 import React, { useState,useEffect } from 'react'
 import MapView from 'react-native-maps';
 import { openDatabase } from 'react-native-sqlite-storage'
@@ -27,7 +27,7 @@ const Donate = () => {
               if (res.rows.length == 0) {
                 txn.executeSql('DROP TABLE IF EXISTS donar', []);
                 txn.executeSql(
-                  'CREATE TABLE IF NOT EXISTS doner(doner_id INTEGER PRIMARY KEY AUTOINCREMENT, doner_name VARCHAR(20), donate_items VARCHAR(20),phone INT(12),description VARCHAR(50))',
+                  'CREATE TABLE IF NOT EXISTS donar(donar_id INTEGER PRIMARY KEY AUTOINCREMENT, donar_name VARCHAR(20), donate_items VARCHAR(20),phone INT(12),description VARCHAR(50))',
                   []
                 );
               }
@@ -52,7 +52,7 @@ const Donate = () => {
             tx.executeSql(
               'INSERT INTO donar(donar_name,donate_items,phone,description) VALUES (?,?,?,?)',
               [donername, donateItems, phone, description],
-              console.log(donername),
+              //console.log(donername),
               (tx, results) => {
                 console.log('Results', results);
                 if (results.rowsAffected > 0) // 0>0  false   1>0 true
@@ -70,9 +70,7 @@ const Donate = () => {
             );
           });
         }
-        // else {
-        //     Alert.alert('Please enter the all filds');
-        // }
+    
       }
 
     const Validation = () => {
@@ -108,11 +106,6 @@ const Donate = () => {
             setdescriptionError('');
             addDoner();
         }
-
-        
-        // if (isValid) {
-        //     check();
-        // }
     }
 
 
